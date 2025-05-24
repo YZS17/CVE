@@ -11,6 +11,10 @@
 * Target.com/index.php?lang=1 true
 * Target.com/index.php?lang=1 false
 
+### Description
+
+Marwal Infotech v1.0 has a SQLi in page.php of param "id".
+
 ### Demo 1:
 * https://www.tagorettcollege.com/page.php?id=23%20and%20true--
 * https://www.tagorettcollege.com/page.php?id=23%20and%20false--

@@ -1,6 +1,4 @@
-## Exploit Title: AssamLook CMS - Blind SQL Injection Vulnerabilities
-
-
+## AssamLook CMS - Blind SQL Injection Vulnerabilities
 
 Vender: https://assamlook.com/
 

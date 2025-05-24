@@ -5,6 +5,11 @@
 #### Software: Aem Solutions CMS v1.0
 
 Tested On: Mac, Firefox
+
+### Description
+
+Sql Injection of param id in page.php of Aem Solutions CMS v1.0.
+
 ## Proof of Concept:
 
 ### Demo :
