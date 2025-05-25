@@ -2,7 +2,7 @@
 
 ### Description
 
-In FLIR AX8 <=1.46 has an Unauthority file upload vulnerabililty
+In FLIR AX8 <=1.46 has an Unauthority file upload vulnerabililty in /upload.php
 
 `upload.php`
 
