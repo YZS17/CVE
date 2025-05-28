@@ -1,4 +1,4 @@
-## DedeCMS v5.7.117存在远程命令执行漏洞
+## DedeCMS v5.7.117 Remote Command Injection
 
 ### Description
 
@@ -366,10 +366,6 @@ if __name__ == "__main__":
 
 
 ![image.png](https://xu17-1326239041.cos.ap-guangzhou.myqcloud.com/xu17/202505211523431.png)
-
-<video src="DedeCMS-RCE.mp4"></video>
-
-
 
 
 
