@@ -168,43 +168,43 @@ else if ($action == 'getfiles')
 }
 ```
 
-当访问`/dede/sys_verifies.php?action=down&curfile=1`时，系统会加载`modifytmp.inc`文件的原因如下：
+When accessing `/dede/sys_verifies.php?action=down&curfile=1`, the system loads the `modifytmp.inc` file for the following reasons:
 
-1. 从代码中可以看到，当`$action=='down'`时，系统会执行相应的分支代码：
+1. As seen in the code, when `$action=='down'`, the system executes the corresponding branch of code:
 
    ```php
    else if($action=='down')
    {
        $cacheFiles = DEDEDATA.'/modifytmp.inc';
        require_once($cacheFiles);
-       // ...后续代码
+       // ...subsequent code
    }
    ```
 
-2. 这个分支的第一个操作就是定义`$cacheFiles`变量指向`modifytmp.inc`文件
+2. The first operation in this branch is to define the `$cacheFiles` variable, which points to the `modifytmp.inc` file:
 
-   - `DEDEDATA`是DedeCMS中定义的常量，指向数据目录
+   - `DEDEDATA` is a constant defined in DedeCMS, pointing to the data directory.
 
-3. 然后立即使用`require_once()`函数加载这个文件：
+3. The system then immediately loads this file using the `require_once()` function:
 
    ```php
    require_once($cacheFiles);
    ```
 
-4. 加载后，代码会使用从`modifytmp.inc`中获取的变量：
+4. After loading, the code uses variables obtained from `modifytmp.inc`:
 
-   - `$fileConut`：用于检查是否下载完所有文件
-   - `$tmpdir`：临时目录名
-   - `$files[$curfile]`：当前要下载的文件名
+   - `$fileConut`: Used to check if all files have been downloaded.
+   - `$tmpdir`: Temporary directory name.
+   - `$files[$curfile]`: The filename of the current file to be downloaded.
 
-这就是漏洞利用链的关键部分：
+This is the key part of the exploit chain:
 
-1. 之前的`getfiles`操作创建了包含恶意代码的`modifytmp.inc`
-2. 当访问`action=down`时，系统通过`require_once()`包含这个文件
-3. PHP解析器会执行文件中的所有PHP代码，包括我们注入的恶意指令
-4. `curfile=1`参数会使系统尝试访问`$files[0]`，触发我们的注入代码
+1. The previous `getfiles` operation creates a `modifytmp.inc` containing malicious code.
+2. When accessing `action=down`, the system includes this file via `require_once()`.
+3. The PHP parser executes all PHP code in the file, including our injected malicious instructions.
+4. The `curfile=1` parameter causes the system to attempt to access `$files[0]`, triggering our injected code.
 
-典型的"文件包含后利用"模式，先将恶意代码写入文件，再诱导系统加载执行该文件。
+This is a typical "file inclusion and exploitation" pattern: first writing malicious code into a file, then inducing the system to load and execute that file.
 
 ### Step1
 
