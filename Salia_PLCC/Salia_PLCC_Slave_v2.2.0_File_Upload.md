@@ -1,10 +1,12 @@
-# Salia PLCC Master/Slave v2.2.0 has a Arbitrary File Upload Vulnerability
+# Salia PLCC v2.2.0 has a Arbitrary File Upload Vulnerability
 
 ### Description
 
 Salia PLCC Master/Slave v2.2.0 has a Arbitrary File Upload vulnerability in the file /firmware.php ,anyone can upload a file to getshell ,which can lead to **Arbitrary Remote Command Execution**
 
 ### Vender
+
+Office Link :https://www.echarge.de
 
 - The latest fireware v2.2.0 download link
 
