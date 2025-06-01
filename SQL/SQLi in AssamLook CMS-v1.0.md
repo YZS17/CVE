@@ -49,6 +49,3 @@ https://www.lumdingcollege.org/view_tender.php?id=108' and 1=2--+
 
 [+] Google Dork:
 intext:"Powered By Assamlook.com"
-
-*********************************************************
-# Discovered by: AmirHossein Abdollahi | Mr_Amir_Typer
