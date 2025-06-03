@@ -1,4 +1,4 @@
-# SQLi vulnerability in Online Examination System v1.0 of file /profile.php
+# SQLi vulnerability in Online Examination System v1.0 of file /update.php
 
 **vender**:
 
