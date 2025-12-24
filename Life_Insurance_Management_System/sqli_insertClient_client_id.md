@@ -1,8 +1,6 @@
+# CVE-2025-6134
 
-
-
-
-# SQLi vulnerability in Life Insurance Management System v1.0 of file /insertClient.php with param 'client_id'
+SQLi vulnerability in Life Insurance Management System v1.0 of file /insertClient.php with param 'client_id'
 
 **vender**:
 

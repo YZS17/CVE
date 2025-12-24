@@ -1,4 +1,6 @@
-# SQLi vulnerability in code-projects NEWS-BUZZ (News Management System) v1.0 of file /publicposts.php with param 'post'
+# CVE-2025-5631
+
+SQLi vulnerability in code-projects NEWS-BUZZ (News Management System) v1.0 of file /publicposts.php with param 'post'
 
 **vender**:
 

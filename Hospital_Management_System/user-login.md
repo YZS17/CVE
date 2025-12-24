@@ -1,6 +1,6 @@
+# CVE-2025-5604
 
-
-# Hospital Management System 1.0 - sqli in /hms/registration.php
+Hospital Management System 1.0 - sqli in /hms/registration.php
 
 - Vendor Homepage: https://www.campcodes.com
 - Software Link: https://www.campcodes.com/projects/online-hospital-management-system-using-php-and-mysql/

@@ -1,4 +1,6 @@
-# SQLi vulnerability in Jasmin-Ransomware v1.0.1 of file /handshake.php with param machine_name
+# CVE-2025-10387
+
+SQLi vulnerability in Jasmin-Ransomware v1.0.1 of file /handshake.php with param machine_name
 
 **vender**:
 

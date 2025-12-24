@@ -1,4 +1,6 @@
-#  SQLi vulnerability in Life Insurance Management System v1.0 of file /insertPayment.php with param 'recipt_no'
+# CVE-2025-6136
+
+SQLi vulnerability in Life Insurance Management System v1.0 of file /insertPayment.php with param 'recipt_no'
 
 **vender**:
 

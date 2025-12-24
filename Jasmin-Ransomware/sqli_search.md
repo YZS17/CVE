@@ -1,4 +1,6 @@
-# SQLi vulnerability in Jasmin-Ransomware v1.0.1 of file /dashboard.php with param 'search'
+# CVE-2025-6096
+
+SQLi vulnerability in Jasmin-Ransomware v1.0.1 of file /dashboard.php with param 'search'
 
 **vender**:
 

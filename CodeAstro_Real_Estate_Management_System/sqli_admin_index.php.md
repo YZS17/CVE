@@ -1,4 +1,6 @@
-# SQLi vulnerability in CodeAstro Real Estate Management System v1.0 of file /admin/index.php
+# CVE-2025-5581
+
+SQLi vulnerability in CodeAstro Real Estate Management System v1.0 of file /admin/index.php
 
 **vender**:
 

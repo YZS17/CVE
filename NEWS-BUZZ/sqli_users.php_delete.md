@@ -1,4 +1,6 @@
-# SQLi vulnerability in code-projects NEWS-BUZZ (News Management System) v1.0 of file /admin/users.php with param 'delete'
+# CVE-2025-5633
+
+SQLi vulnerability in code-projects NEWS-BUZZ (News Management System) v1.0 of file /admin/users.php with param 'delete'
 
 **vender**:
 

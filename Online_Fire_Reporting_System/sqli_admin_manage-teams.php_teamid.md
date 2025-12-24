@@ -1,6 +1,6 @@
+# CVE-2025-5617
 
-
-# SQLi vulnerability in Online Fire Reporting System v1.2 of file /admin/manage-teams.php
+SQLi vulnerability in Online Fire Reporting System v1.2 of file /admin/manage-teams.php
 
 **vender**:
 

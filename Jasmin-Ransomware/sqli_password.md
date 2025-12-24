@@ -1,4 +1,6 @@
-# SQLi vulnerability in Jasmin-Ransomware v1.0.1 of file /checklogin.php with param password
+# CVE-2025-44216
+
+SQLi vulnerability in Jasmin-Ransomware v1.0.1 of file /checklogin.php with param password
 
 **vender**:
 

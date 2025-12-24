@@ -1,4 +1,6 @@
-# SQLi vulnerability in Online Fire Reporting System v1.2 of file /reporting.php
+# CVE-2025-5612
+
+SQLi vulnerability in Online Fire Reporting System v1.2 of file /reporting.php
 
 **vender**:
 

@@ -1,6 +1,6 @@
+# CVE-2025-5616
 
-
-# SQLi vulnerability in Online Fire Reporting System v1.2 of file /admin/profile.php
+SQLi vulnerability in Online Fire Reporting System v1.2 of file /admin/profile.php
 
 **vender**:
 
